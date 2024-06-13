@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все пользователи</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+<div class="viewall">
+<h1>Администрирование</h1>
+<table class="admintable">
+    <caption>
+        <h1 id="top">Все зарегистрированные пользователи системы:</h1>
+    </caption>
+
+    <thead>
+    <tr>
+        <th rowspan="2">№ пп</th>
+        <th colspan="4">Информация из базы данных</th>
+        <th colspan="4">Функции администратора</th>
+    </tr>
+
+    <tr>
+        <th scope="col">Идентификатор</th>
+        <th scope="col">Имя пользователя</th>
+        <th scope="col">Адрес электронной почты</th>
+        <th scope="col">Текущая роль</th>
+        <th scope="col">Сменить роль</th>
+        <th scope="col">Редактировать</th>
+        <th scope="col">Изменить пароль</th>
+        <th scope="col">Удалить аккаунт</th>
+    </tr>
+    </thead>
+    <tbody>
+    <div th:each="person,itrStat : ${people}">
+        <tr>
+            <th scope="row">[[${itrStat.count}]]</th>
+            <td>[[${person.getId()}]]</td>
+            <td>[[${person.getUsername()}]]</td>
+            <td>[[${person.getEmail()}]]</td>
+            <td>[[${person.getRole()}]]</td>
+
+            <td> <a th:href="@{/admin/changerole/{id}(id=${person.getId()})}"> сменить роль </a></td>
+            <td> <a th:href="@{/people/update/{id}(id=${person.getId()})}"> редактировать </a></td>
+            <td> <a th:href="@{/people/changepass/{id}(id=${person.getId()})}"> изменить пароль </a></td>
+            <td> <a th:href="@{/people/delete/{id}(id=${person.getId()})}" onclick="return confirmdelete();"> удалить </a></td>
+        </tr>
+    </div>
+    </tbody>
+</table>
+<br/>
+    <div class="button-container">
+<p><a class="btn" href="#top">Наверх</a></p>
+<hr>
+
+    <a class="btn" href="/people/info">Перейти в 'данные аккаунта'</a>
+
+
+
+<script>
+    function confirmdelete() {
+    if (confirm("Подтвердите удаление аккаунта")) {
+    return true;
+    } else {
+    return false;
+    }
+    }
+</script>
+</div>
+</div>
+</div>
+</body>
+</html>

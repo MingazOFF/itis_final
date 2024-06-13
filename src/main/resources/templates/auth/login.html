@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница входа</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+<div class="container">
+<div class="login">
+<h1>Страница входа</h1>
+<form name="loginform" method="post" action="/process_login">
+
+     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <table>
+    <tr><td><label class="labeltext" for="username"> Введите email:   </label> </td><td>
+    <input type="text" name="username" id="username"/> </td></tr>
+
+        <tr><td> <label class="labeltext" for="password"> Введите пароль: </label></td><td>
+    <input type="password" name="password" id="password"/></td></tr>
+</table>
+    <div class="button-container">
+
+    <input class="btn" type="submit" value="Войти в аккаунт"/>
+
+    <div th:if="${param.error}" style="color: #ffb3b3">
+        <b>Пользователь не найден!</b>
+        <br/>
+    </div>
+
+</form>
+
+    <a class="btn" href="/">Вернуться на страницу приветствия</a>
+
+</div>
+</div>
+</div>
+</body>
+</html>

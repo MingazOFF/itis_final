@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение пароля</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+<div class="changepass">
+<h1>Изменение пароля  </h1>
+
+   <h2>  аккаунта №[[${person.getId()}]]
+    <br/>
+ почта: [[${person.getEmail()}]]
+   </h2>
+
+<form th:method="POST" th:action="@{/people/changepass/{id}(id=${person.getId()})}" th:object="${person}">
+    <label class="labeltext" for="password">Введите новый пароль:</label>
+    <input type="password" th:field="*{password}" id="password"/>
+    <div style="color:#ffb3b3" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+<br/>
+<br/>
+    <div class="button-container">
+    <input class="btn" type="submit" value="Сохранить"/>
+</form>
+
+    <a class="btn" href="/people/info">Вернуться к 'данным аккаунта'</a>
+
+</div>
+</div>
+</div>
+</body>
+</html>

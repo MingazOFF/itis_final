@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Данные изменены</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+<div class="sucupdate">
+<h1>
+    Изменение данных пользователя <br/> выполнено успешно! </h1>
+    <form th:action="@{/auth/logout}" th:method="POST">
+    <div class="button-container">
+    <a class="btn" href="/people/info">Вернуться к 'данным аккаунта'</a>
+
+    <input class="btn" type="submit" value="Выйти из аккаунта"/>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Данные аккаунта</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+<div class="info">
+<h1>Данные аккаунта №[[${person.getId()}]],
+  <br/>
+  с ролью
+  <span th:if="${person.getRole().name() == 'ROLE_ADMIN'}"> администратора</span>
+  <span th:if="${person.getRole().name() == 'ROLE_USER'}"> пользователя</span>
+
+</h1>
+
+<table class="infotable">
+  <div th:object="${person}">
+
+    <tr>
+      <th scope="col">Id:</th>
+      <td>[[${person.getId()}]]</td>
+    </tr>
+    <tr>
+      <th scope="col">Username:</th>
+      <td>[[${person.getUsername()}]]</td>
+    </tr>
+    <tr>
+      <th scope="col">Email:</th>
+      <td>[[${person.getEmail()}]]</td>
+    </tr>
+    <tr>
+      <th scope="col">Role:</th>
+      <td>[[${person.getRole()}]]</td>
+    </tr>
+  </div>
+</table>
+<br/>
+  <form  th:action="@{/auth/logout}" th:method="POST">
+  <div class="button-container">
+
+
+    <a class="btn" th:href="@{/people/update/{id}(id=${person.getId()})}">Редактировать данные аккаунта</a>
+
+    <a class="btn" th:href="@{/people/changepass/{id}(id=${person.getId()})}">Изменить пароль</a>
+
+    <a class="btn" th:href="@{/people/delete/{id}(id=${person.getId()})}" onclick="return confirmdelete();">Удалить аккаунт</a>
+
+    <a class="admbtn" th:if="${person.getRole().name() == 'ROLE_ADMIN'}" th:href="@{/admin/viewall}">Администрирование</a>
+
+
+
+
+
+  <input class="btn" type="submit" value="Выйти из аккаунта"/>
+
+</form>
+
+
+<script>
+  function confirmdelete() {
+  if (confirm("Подтвердите удаление аккаунта")) {
+  return true;
+  } else {
+  return false;
+  }
+  }
+</script>
+  </div>
+</div>
+</div>
+</body>
+</html>
